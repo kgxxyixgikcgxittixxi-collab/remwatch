@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="rem.face">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-feature android:name="android.hardware.type.watch"/>
+    <application android:label="RemFace" android:allowBackup="false">
+        <uses-library android:name="com.google.android.wearable" android:required="false"/>
+        <service android:name=".RemFace" android:label="Rem" android:exported="true"
+                 android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService"/>
+                <category android:name="com.google.android.wearable.watchface.category.WEARABLE"/>
+            </intent-filter>
+            <meta-data android:name="android.service.wallpaper" android:resource="@xml/watch_face"/>
+        </service>
+    </application>
+</manifest>
