@@ -1,5 +1,7 @@
 name: build
 on: [push, workflow_dispatch]
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -9,12 +11,13 @@ jobs:
         with:
           distribution: temurin
           java-version: 11
+      - uses: android-actions/setup-android@v3
       - name: Get Gradle
         run: |
           curl -sL -o g.zip https://services.gradle.org/distributions/gradle-6.9.4-bin.zip
           unzip -q g.zip
       - name: Build
-        run: ./gradle-6.9.4/bin/gradle assembleDebug --no-daemon -q
+        run: ./gradle-6.9.4/bin/gradle assembleDebug --no-daemon
       - name: Clean old release
         run: gh release delete v1 --yes --cleanup-tag || true
         env:
