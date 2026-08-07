@@ -39,12 +39,12 @@ public class RemFace extends WallpaperService {
             bg = BitmapFactory.decodeFile(f.getAbsolutePath());
             paint.setColor(Color.WHITE);
             paint.setTextAlign(Paint.Align.CENTER);
-            registerReceiver(timeTick, new IntentFilter(Intent.ACTION_TIME_TICK));
+            RemFace.this.registerReceiver(timeTick, new IntentFilter(Intent.ACTION_TIME_TICK));
         }
 
         @Override
         public void onDestroy() {
-            try { unregisterReceiver(timeTick); } catch (Exception e) {}
+            try { RemFace.this.unregisterReceiver(timeTick); } catch (Exception e) {}
             handler.removeCallbacks(tick);
             super.onDestroy();
         }
